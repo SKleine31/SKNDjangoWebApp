@@ -4,14 +4,13 @@
 <head>
     <title>Student Dashboard</title>
 </head>
+
 <body>
 
     <h1>Student Dashboard</h1>
 
     <h2>Total Students</h2>
-    <p>
-        {{ total_students }}
-    </p>
+    <p>{{ total_students }}</p>
 
     <hr>
 
@@ -28,11 +27,10 @@
             <td>{{ item.program }}</td>
             <td>{{ item.total }}</td>
         </tr>
+
         {% empty %}
         <tr>
-            <td colspan="2">
-                No program data available.
-            </td>
+            <td colspan="2">No program data available.</td>
         </tr>
         {% endfor %}
     </table>
@@ -52,31 +50,53 @@
             <td>{{ item.year_level }}</td>
             <td>{{ item.total }}</td>
         </tr>
+
         {% empty %}
         <tr>
-            <td colspan="2">
-                No year-level data available.
-            </td>
+            <td colspan="2">No year-level data available.</td>
         </tr>
         {% endfor %}
     </table>
 
     <hr>
 
-    <!-- Module 06 AJAX / Fetch API Section -->
-
     <h2>Students Loaded Using Fetch API</h2>
+
+    <label for="student-search">Search:</label>
+
+    <input
+        type="text"
+        id="student-search"
+        placeholder="Type a name or email"
+    >
+
+    <label for="program-filter">Program:</label>
+
+    <select id="program-filter">
+        <option value="">All programs</option>
+    </select>
+
+    <button id="clear-filters" type="button">
+        Clear Filters
+    </button>
+
+    <button id="refresh-students" type="button">
+        Refresh Data
+    </button>
 
     <p>
         Student Count:
         <strong id="student-count">0</strong>
     </p>
 
-    <p id="dashboard-message">
-        Loading students...
-    </p>
+    <p id="result-count">Showing 0 students</p>
+
+    <p id="loading-message">Loading students...</p>
+
+    <p id="error-message"></p>
 
     <table border="1">
+
         <thead>
             <tr>
                 <th>ID</th>
@@ -89,6 +109,7 @@
 
         <tbody id="student-table-body">
         </tbody>
+
     </table>
 
     <hr>
@@ -97,8 +118,8 @@
         Back to Student List
     </a>
 
-    <!-- Module 06 JavaScript -->
     {% load static %}
+
     <script src="{% static 'registration/js/student_dashboard.js' %}"></script>
 
 </body>
