@@ -1,0 +1,127 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+</head>
+
+<body>
+
+    <h1>Student Dashboard</h1>
+
+    <h2>Total Students</h2>
+    <p>{{ total_students }}</p>
+
+    <hr>
+
+    <h2>Students by Program</h2>
+
+    <table border="1">
+        <tr>
+            <th>Program</th>
+            <th>Total</th>
+        </tr>
+
+        {% for item in program_summary %}
+        <tr>
+            <td>{{ item.program }}</td>
+            <td>{{ item.total }}</td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="2">No program data available.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <hr>
+
+    <h2>Students by Year Level</h2>
+
+    <table border="1">
+        <tr>
+            <th>Year Level</th>
+            <th>Total</th>
+        </tr>
+
+        {% for item in year_summary %}
+        <tr>
+            <td>{{ item.year_level }}</td>
+            <td>{{ item.total }}</td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="2">No year-level data available.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <hr>
+
+    <h2>Students Loaded Using Fetch API</h2>
+
+    <label for="student-search">Search:</label>
+
+    <input
+        type="text"
+        id="student-search"
+        placeholder="Type a name or email"
+    >
+
+    <label for="program-filter">Program:</label>
+
+    <select id="program-filter">
+        <option value="">All programs</option>
+    </select>
+
+    <button id="clear-filters" type="button">
+        Clear Filters
+    </button>
+
+    <button id="refresh-students" type="button">
+        Refresh Data
+    </button>
+
+    <p>
+        Student Count:
+        <strong id="student-count">0</strong>
+    </p>
+
+    <p id="result-count">Showing 0 students</p>
+
+    <p id="loading-message">Loading students...</p>
+
+    <p id="error-message"></p>
+
+    <table border="1">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>Program</th>
+                <th>Year Level</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+
+        <tbody id="student-table-body">
+        </tbody>
+
+    </table>
+
+    <hr>
+
+    <a href="{% url 'student_list' %}">
+        Back to Student List
+    </a>
+
+    {% load static %}
+
+    <script src="{% static 'registration/js/student_dashboard.js' %}"></script>
+
+</body>
+</html>
+```
